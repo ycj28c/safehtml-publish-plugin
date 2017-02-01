@@ -2,7 +2,7 @@ package net.masterthought.jenkins;
 
 import hudson.model.Action;
 
-import net.masterthought.cucumber.ReportBuilder;
+//import net.masterthought.cucumber.ReportBuilder;
 
 public abstract class CucumberReportBaseAction implements Action {
 
@@ -10,7 +10,9 @@ public abstract class CucumberReportBaseAction implements Action {
 
     @Override
     public String getUrlName() {
-        return ReportBuilder.HOME_PAGE;
+//        return ReportBuilder.HOME_PAGE;
+    	 final String HOME_PAGE = "overview-features.html";
+    	 return HOME_PAGE;
     }
 
     @Override

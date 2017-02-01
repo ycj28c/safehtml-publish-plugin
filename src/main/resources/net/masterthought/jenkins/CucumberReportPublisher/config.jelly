@@ -28,74 +28,7 @@
                 <f:textbox default="0"/>
             </f:entry>
         </f:section>
-
-
-        <f:section title="${%buildResult}">
-            <f:description>
-                ${%buildResult.description}
-            </f:description>
-            <f:entry
-                    title="${%failedStepsNumber.title}"
-                    field="failedStepsNumber"
-                    description="${%failedStepsNumber.description}">
-                <f:textbox default="0"/>
-            </f:entry>
-            <f:entry
-                    title="${%skippedStepsNumber.title}"
-                    field="skippedStepsNumber"
-                    description="${%skippedStepsNumber.description}">
-                <f:textbox default="0"/>
-            </f:entry>
-            <f:entry
-                    title="${%pendingStepsNumber.title}"
-                    field="pendingStepsNumber"
-                    description="${%pendingStepsNumber.description}">
-                <f:textbox default="0"/>
-            </f:entry>
-            <f:entry
-                    title="${%undefinedStepsNumber.title}"
-                    field="undefinedStepsNumber"
-                    description="${%undefinedStepsNumber.description}">
-                <f:textbox default="0"/>
-            </f:entry>
-
-            <f:entry
-                    title="${%failedScenariosNumber.title}"
-                    field="failedScenariosNumber"
-                    description="${%failedScenariosNumber.description}">
-                <f:textbox default="0"/>
-            </f:entry>
-            <f:entry
-                    title="${%failedFeaturesNumber.title}"
-                    field="failedFeaturesNumber"
-                    description="${%failedFeaturesNumber.description}">
-                <f:textbox default="0"/>
-            </f:entry>
-
-            <f:entry
-                    title="${%buildStatus.title}"
-                    field="buildStatus"
-                    description="${%buildStatus.description}">
-                <f:select/>
-            </f:entry>
-
-        </f:section>
-
-        <f:section title="${%otherSection}">
-            <f:entry
-                    title="${%parallelTesting.title}"
-                    field="parallelTesting"
-                    description="${%parallelTesting.description}">
-                <f:checkbox/>
-            </f:entry>
-
-            <f:entry
-                    field="classifications"
-                    description="${%classifications.description}">
-                <f:repeatableProperty field="classifications"/>
-            </f:entry>
-        </f:section>
-
     </f:advanced>
+    
 </j:jelly>
 
