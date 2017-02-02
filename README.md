@@ -1,5 +1,5 @@
 # benchmark-report-plugin
-jenkins benchmark report plugin to solve the jenkins security issue
+jenkins benchmark report plugin embody insight benchmark test html report
 
 
 reference:
