@@ -1,4 +1,4 @@
-package net.masterthought.jenkins;
+package com.equilar.jenkins;
 
 import hudson.Util;
 import hudson.model.Action;
@@ -131,7 +131,7 @@ public class SafeArchiveServingAction implements Action {
      * safe.
      *
      * @throws NoSuchAlgorithmException If the platform does unexpectedly not support SHA-1
-     * @throws IOException
+     * @throws IOException IO exception
      */
     public void processDirectory() throws NoSuchAlgorithmException, IOException {
         LOGGER.log(Level.FINE, "Scanning " + getRootDir());

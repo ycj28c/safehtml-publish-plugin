@@ -1,4 +1,4 @@
-package net.masterthought.jenkins;
+package com.equilar.jenkins;
 
 import hudson.model.Run;
 import jenkins.model.RunAction2;
