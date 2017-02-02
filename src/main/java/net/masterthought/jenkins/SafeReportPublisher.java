@@ -1,10 +1,16 @@
 package net.masterthought.jenkins;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.nio.charset.Charset;
 
 import hudson.Extension;
 import hudson.FilePath;
@@ -30,23 +36,23 @@ import org.kohsuke.stapler.DataBoundConstructor;
 public class SafeReportPublisher extends Publisher implements SimpleBuildStep {
 
 //    private final static String DEFAULT_FILE_INCLUDE_PATTERN = "**/*.json";
-	private final static String DEFAULT_FILE_INCLUDE_PATTERN = "**/*.*";
+//	private final static String DEFAULT_FILE_INCLUDE_PATTERN = "**/*.*";
 
-    private final static String TRENDS_DIR = "benchmarkReport";
-    private final static String TRENDS_FILE = "cucumber-trends.json";
+//    private final static String TRENDS_DIR = "benchmarkReport";
+//    private final static String TRENDS_FILE = "cucumber-trends.json";
 
     public final String jsonReportDirectory;
     public final String fileIncludePattern;
-    public final String fileExcludePattern;
-    public final int trendsLimit;
+//    public final String fileExcludePattern;
+//    public final int trendsLimit;
 
-    public final int failedStepsNumber;
-    public final int skippedStepsNumber;
-    public final int pendingStepsNumber;
-    public final int undefinedStepsNumber;
-    public final int failedScenariosNumber;
-    public final int failedFeaturesNumber;
-    public final boolean parallelTesting;
+//    public final int failedStepsNumber;
+//    public final int skippedStepsNumber;
+//    public final int pendingStepsNumber;
+//    public final int undefinedStepsNumber;
+//    public final int failedScenariosNumber;
+//    public final int failedFeaturesNumber;
+//    public final boolean parallelTesting;
 
     public List<Classification> classifications = Collections.emptyList();
 
@@ -54,30 +60,44 @@ public class SafeReportPublisher extends Publisher implements SimpleBuildStep {
     
     public static final String BASE_DIRECTORY = "benchmarkReport";
     public static final String HOME_PAGE = "network/NetworkIndex.html";
+    public static final String WRAPPER_NAME = "safereport-wrapper.html";
+    
+	@DataBoundConstructor
+	public SafeReportPublisher(String jsonReportDirectory, String fileIncludePattern, String buildStatus,
+			List<Classification> classifications) {
 
-    @DataBoundConstructor
-    public SafeReportPublisher(String jsonReportDirectory, String fileIncludePattern, String fileExcludePattern,
-                                   int trendsLimit, int failedStepsNumber, int skippedStepsNumber, int pendingStepsNumber,
-                                   int undefinedStepsNumber, int failedScenariosNumber, int failedFeaturesNumber,
-                                   String buildStatus, boolean parallelTesting, List<Classification> classifications) {
-
-        this.jsonReportDirectory = jsonReportDirectory;
-        this.fileIncludePattern = fileIncludePattern;
-        this.fileExcludePattern = fileExcludePattern;
-        this.trendsLimit = trendsLimit;
-        this.failedStepsNumber = failedStepsNumber;
-        this.skippedStepsNumber = skippedStepsNumber;
-        this.pendingStepsNumber = pendingStepsNumber;
-        this.undefinedStepsNumber = undefinedStepsNumber;
-        this.failedScenariosNumber = failedScenariosNumber;
-        this.failedFeaturesNumber = failedFeaturesNumber;
-        this.buildStatus = buildStatus == null ? null : Result.fromString(buildStatus);
-        this.parallelTesting = parallelTesting;
-        // don't store the classifications if there was no element provided
-        if (classifications != null) {
-            this.classifications = classifications;
-        }
-    }
+		this.jsonReportDirectory = jsonReportDirectory;
+		this.fileIncludePattern = fileIncludePattern;
+		this.buildStatus = buildStatus == null ? null : Result.fromString(buildStatus);
+		// don't store the classifications if there was no element provided
+		if (classifications != null) {
+			this.classifications = classifications;
+		}
+	}
+	
+//    @DataBoundConstructor
+//    public SafeReportPublisher(String jsonReportDirectory, String fileIncludePattern, String fileExcludePattern,
+//                                   int trendsLimit, int failedStepsNumber, int skippedStepsNumber, int pendingStepsNumber,
+//                                   int undefinedStepsNumber, int failedScenariosNumber, int failedFeaturesNumber,
+//                                   String buildStatus, boolean parallelTesting, List<Classification> classifications) {
+//
+//        this.jsonReportDirectory = jsonReportDirectory;
+//        this.fileIncludePattern = fileIncludePattern;
+////        this.fileExcludePattern = fileExcludePattern;
+////        this.trendsLimit = trendsLimit;
+////        this.failedStepsNumber = failedStepsNumber;
+////        this.skippedStepsNumber = skippedStepsNumber;
+////        this.pendingStepsNumber = pendingStepsNumber;
+////        this.undefinedStepsNumber = undefinedStepsNumber;
+////        this.failedScenariosNumber = failedScenariosNumber;
+////        this.failedFeaturesNumber = failedFeaturesNumber;
+//        this.buildStatus = buildStatus == null ? null : Result.fromString(buildStatus);
+////        this.parallelTesting = parallelTesting;
+//        // don't store the classifications if there was no element provided
+//        if (classifications != null) {
+//            this.classifications = classifications;
+//        }
+//    }
 
     public List<Classification> getClassifications() {
         return classifications;
@@ -92,31 +112,52 @@ public class SafeReportPublisher extends Publisher implements SimpleBuildStep {
 //        SafeArchiveServingRunAction caa = new SafeArchiveServingRunAction(new File(run.getRootDir(), ReportBuilder.BASE_DIRECTORY),
 //                ReportBuilder.BASE_DIRECTORY, ReportBuilder.HOME_PAGE, CucumberReportBaseAction.ICON_NAME, Messages.SidePanel_DisplayName());
         SafeArchiveServingRunAction caa = new SafeArchiveServingRunAction(new File(run.getRootDir(), BASE_DIRECTORY),
-              BASE_DIRECTORY, HOME_PAGE, SafeReportBaseAction.ICON_NAME, Messages.SidePanel_DisplayName());
+              BASE_DIRECTORY, fileIncludePattern, SafeReportBaseAction.ICON_NAME, Messages.SidePanel_DisplayName());
         run.addAction(caa);
+    }
+    
+    private void generateHTMLIndexPage(File path, @Nonnull TaskListener listener) throws IOException{
+    	listener.getLogger().println("***** Generating wrappedReport.html");
+    	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), Charset.defaultCharset()));
+		try {
+			bw.write("<meta http-equiv=\"refresh\" content=\"0; url=network/NetworkIndex.html\" />");
+		} finally {
+			try {
+				bw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     private void generateReport(Run<?, ?> build, FilePath workspace, TaskListener listener) throws InterruptedException, IOException {
-        log(listener, "Preparing Cucumber Reports");
+        log(listener, "Preparing Ralph Benchmark Reports");
 
-        // create directory where trends will be stored
-        final File trendsDir = new File(build.getParent().getRootDir(), TRENDS_DIR);
-        if (!trendsDir.exists()) {
-            if (!trendsDir.mkdir()) {
-                throw new IllegalStateException("Could not create directory for trends: " + trendsDir);
-            }
-        }
+//        // create directory where trends will be stored
+//        final File trendsDir = new File(build.getParent().getRootDir(), TRENDS_DIR);
+//        if (!trendsDir.exists()) {
+//            if (!trendsDir.mkdir()) {
+//                throw new IllegalStateException("Could not create directory for trends: " + trendsDir);
+//            }
+//        }
 
         // source directory (possibly on slave)
         FilePath inputDirectory = new FilePath(workspace, jsonReportDirectory);
+        if (!inputDirectory.exists()) {
+        	throw new IllegalStateException("Could not find source directory: " + inputDirectory);
+        }
 
         File directoryForReport = build.getRootDir();
 //        File directoryJsonCache = new File(directoryForReport, ReportBuilder.BASE_DIRECTORY + File.separatorChar + ".cache");
         File directoryJsonCache = new File(directoryForReport, BASE_DIRECTORY);
+        
 //        int copiedFiles = inputDirectory.copyRecursiveTo(DEFAULT_FILE_INCLUDE_PATTERN, new FilePath(directoryJsonCache));
         int copiedFiles = inputDirectory.copyRecursiveTo(new FilePath(directoryJsonCache));
-        log(listener, String.format("Copied %d json files from workspace \"%s\" to reports directory \"%s\"",
+        log(listener, String.format("Copied %d report files from workspace \"%s\" to reports directory \"%s\"",
                 copiedFiles, inputDirectory.getRemote(), directoryJsonCache));
+        
+        log(listener, "directoryJsonCache: "+ directoryJsonCache);
+        generateHTMLIndexPage(new File(directoryJsonCache, WRAPPER_NAME),  listener);
 //
 //        // exclude JSONs that should be skipped (as configured by the user)
 //        String[] jsonReportFiles = findJsonFiles(directoryJsonCache, fileIncludePattern, fileExcludePattern);
@@ -223,7 +264,7 @@ public class SafeReportPublisher extends Publisher implements SimpleBuildStep {
 //    }
 
     private static void log(TaskListener listener, String message) {
-        listener.getLogger().println("[CucumberReport] " + message);
+        listener.getLogger().println("[RalphBenchmarkReport] " + message);
     }
 
     @Override

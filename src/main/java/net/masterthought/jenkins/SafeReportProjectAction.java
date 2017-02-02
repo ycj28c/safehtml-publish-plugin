@@ -12,7 +12,7 @@ public class SafeReportProjectAction extends SafeReportBaseAction implements Pro
 
     private final AbstractProject<?, ?> project;
     
-	public static final String BASE_DIRECTORY = "benchmarkReport";
+//	public static final String BASE_DIRECTORY = "benchmarkReport";
     
     public static final String HOME_PAGE = "network/NetworkIndex.html";
 
@@ -25,8 +25,8 @@ public class SafeReportProjectAction extends SafeReportBaseAction implements Pro
         Run<?, ?> run = this.project.getLastCompletedBuild();
         if (run != null) {
 //            return extractBuildNumber(run.getUrl()) + "/" + ReportBuilder.BASE_DIRECTORY + "/" + ReportBuilder.HOME_PAGE;
-        	Log.info("********* CucumberReportProjectAction: " + run.getUrl());
-        	return extractBuildNumber(run.getUrl()) + "/" + BASE_DIRECTORY + "/" + HOME_PAGE;
+        	Log.info("********* SafeReportProjectAction: " + run.getUrl());
+        	return extractBuildNumber(run.getUrl()) + "/" + SafeReportPublisher.BASE_DIRECTORY + "/" + HOME_PAGE;
         }
 
         // none build was completed, report is yet not available

@@ -6,14 +6,14 @@
             <f:entry title="${%jsonReportDirectory.title}"
                      field="jsonReportDirectory"
                      description="${%jsonReportDirectory.description}">
-                <f:textbox/>
+                <f:textbox default="target/report"/>
             </f:entry>
 
             <f:entry
                     title="${%fileIncludePattern.title}"
                     field="fileIncludePattern"
                     description="${%fileIncludePattern.description}">
-                <f:textbox default="**/*.json"/>
+                <f:textbox default="index.html"/>
             </f:entry>
         </f:section>
     </f:advanced>
