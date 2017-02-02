@@ -12,8 +12,8 @@ public abstract class SafeReportBaseAction implements Action {
     @Override
     public String getUrlName() {
 //        return ReportBuilder.HOME_PAGE;
-    	 final String HOME_PAGE = "index.html";
-    	 return HOME_PAGE;
+//    	 final String HOME_PAGE = "index.html";
+    	 return SafeReportPublisher.WRAPPER_NAME;
     }
 
     @Override

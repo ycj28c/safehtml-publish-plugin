@@ -14,7 +14,7 @@ public class SafeReportProjectAction extends SafeReportBaseAction implements Pro
     
 //	public static final String BASE_DIRECTORY = "benchmarkReport";
     
-    public static final String HOME_PAGE = "network/NetworkIndex.html";
+//    public static final String HOME_PAGE = "network/NetworkIndex.html";
 
     public SafeReportProjectAction(AbstractProject<?, ?> project) {
         this.project = project;
@@ -26,7 +26,7 @@ public class SafeReportProjectAction extends SafeReportBaseAction implements Pro
         if (run != null) {
 //            return extractBuildNumber(run.getUrl()) + "/" + ReportBuilder.BASE_DIRECTORY + "/" + ReportBuilder.HOME_PAGE;
         	Log.info("********* SafeReportProjectAction: " + run.getUrl());
-        	return extractBuildNumber(run.getUrl()) + "/" + SafeReportPublisher.BASE_DIRECTORY + "/" + HOME_PAGE;
+        	return extractBuildNumber(run.getUrl()) + "/" + SafeReportPublisher.BASE_DIRECTORY + "/" + SafeReportPublisher.WRAPPER_NAME;
         }
 
         // none build was completed, report is yet not available

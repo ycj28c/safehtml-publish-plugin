@@ -22,6 +22,7 @@ import hudson.model.Descriptor;
 import hudson.model.Result;
 import hudson.model.Run;
 import hudson.model.TaskListener;
+import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Publisher;
 import javax.annotation.Nonnull;
@@ -41,8 +42,8 @@ public class SafeReportPublisher extends Publisher implements SimpleBuildStep {
 //    private final static String TRENDS_DIR = "benchmarkReport";
 //    private final static String TRENDS_FILE = "cucumber-trends.json";
 
-    public final String jsonReportDirectory;
-    public final String fileIncludePattern;
+    public final String archivedReportDirectory;
+    public final String htmlIndexPage;
 //    public final String fileExcludePattern;
 //    public final int trendsLimit;
 
@@ -59,15 +60,15 @@ public class SafeReportPublisher extends Publisher implements SimpleBuildStep {
     public final Result buildStatus;
     
     public static final String BASE_DIRECTORY = "benchmarkReport";
-    public static final String HOME_PAGE = "network/NetworkIndex.html";
+//    public static final String HOME_PAGE = "network/NetworkIndex.html";
     public static final String WRAPPER_NAME = "safereport-wrapper.html";
     
 	@DataBoundConstructor
-	public SafeReportPublisher(String jsonReportDirectory, String fileIncludePattern, String buildStatus,
+	public SafeReportPublisher(String archivedReportDirectory, String htmlIndexPage, String buildStatus,
 			List<Classification> classifications) {
 
-		this.jsonReportDirectory = jsonReportDirectory;
-		this.fileIncludePattern = fileIncludePattern;
+		this.archivedReportDirectory = archivedReportDirectory;
+		this.htmlIndexPage = htmlIndexPage;
 		this.buildStatus = buildStatus == null ? null : Result.fromString(buildStatus);
 		// don't store the classifications if there was no element provided
 		if (classifications != null) {
@@ -112,7 +113,7 @@ public class SafeReportPublisher extends Publisher implements SimpleBuildStep {
 //        SafeArchiveServingRunAction caa = new SafeArchiveServingRunAction(new File(run.getRootDir(), ReportBuilder.BASE_DIRECTORY),
 //                ReportBuilder.BASE_DIRECTORY, ReportBuilder.HOME_PAGE, CucumberReportBaseAction.ICON_NAME, Messages.SidePanel_DisplayName());
         SafeArchiveServingRunAction caa = new SafeArchiveServingRunAction(new File(run.getRootDir(), BASE_DIRECTORY),
-              BASE_DIRECTORY, fileIncludePattern, SafeReportBaseAction.ICON_NAME, Messages.SidePanel_DisplayName());
+              BASE_DIRECTORY, htmlIndexPage, SafeReportBaseAction.ICON_NAME, Messages.SidePanel_DisplayName());
         run.addAction(caa);
     }
     
@@ -120,7 +121,8 @@ public class SafeReportPublisher extends Publisher implements SimpleBuildStep {
     	listener.getLogger().println("***** Generating wrappedReport.html");
     	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), Charset.defaultCharset()));
 		try {
-			bw.write("<meta http-equiv=\"refresh\" content=\"0; url=network/NetworkIndex.html\" />");
+//			bw.write("<meta http-equiv=\"refresh\" content=\"0; url=network/NetworkIndex.html\" />");
+			bw.write("<meta http-equiv=\"refresh\" content=\"0; url=" + htmlIndexPage + "\" />");
 		} finally {
 			try {
 				bw.close();
@@ -142,7 +144,7 @@ public class SafeReportPublisher extends Publisher implements SimpleBuildStep {
 //        }
 
         // source directory (possibly on slave)
-        FilePath inputDirectory = new FilePath(workspace, jsonReportDirectory);
+        FilePath inputDirectory = new FilePath(workspace, archivedReportDirectory);
         if (!inputDirectory.exists()) {
         	throw new IllegalStateException("Could not find source directory: " + inputDirectory);
         }
@@ -299,6 +301,15 @@ public class SafeReportPublisher extends Publisher implements SimpleBuildStep {
     }
 
     @Extension
-    public static class DescriptorImpl extends SafeReportBuildStepDescriptor {
-    }
+	public static class DescriptorImpl extends BuildStepDescriptor<Publisher> {
+		@Override
+		public String getDisplayName() {
+			return Messages.Plugin_DisplayName();
+		}
+
+		@Override
+		public boolean isApplicable(Class<? extends AbstractProject> jobType) {
+			return true;
+		}
+	}
 }

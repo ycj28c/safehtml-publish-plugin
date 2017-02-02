@@ -2,17 +2,17 @@
 <j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
 
     <f:advanced>
-        <f:section title="${%jsonReportDirectory}">
-            <f:entry title="${%jsonReportDirectory.title}"
-                     field="jsonReportDirectory"
-                     description="${%jsonReportDirectory.description}">
+        <f:section title="${%archivedReportDirectory}">
+            <f:entry title="${%archivedReportDirectory.title}"
+                     field="archivedReportDirectory"
+                     description="${%archivedReportDirectory.description}">
                 <f:textbox default="target/report"/>
             </f:entry>
 
             <f:entry
-                    title="${%fileIncludePattern.title}"
-                    field="fileIncludePattern"
-                    description="${%fileIncludePattern.description}">
+                    title="${%htmlIndexPage.title}"
+                    field="htmlIndexPage"
+                    description="${%htmlIndexPage.description}">
                 <f:textbox default="index.html"/>
             </f:entry>
         </f:section>
