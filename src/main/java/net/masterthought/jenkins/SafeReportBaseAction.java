@@ -4,7 +4,7 @@ import hudson.model.Action;
 
 //import net.masterthought.cucumber.ReportBuilder;
 
-public abstract class CucumberReportBaseAction implements Action {
+public abstract class SafeReportBaseAction implements Action {
 
     protected static final String ICON_NAME = "/plugin/cucumber-reports/icon.png";
 

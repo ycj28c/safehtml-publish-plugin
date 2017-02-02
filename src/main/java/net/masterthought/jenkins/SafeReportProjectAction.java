@@ -8,7 +8,7 @@ import hudson.model.Run;
 
 //import net.masterthought.cucumber.ReportBuilder;
 
-public class CucumberReportProjectAction extends CucumberReportBaseAction implements ProminentProjectAction {
+public class SafeReportProjectAction extends SafeReportBaseAction implements ProminentProjectAction {
 
     private final AbstractProject<?, ?> project;
     
@@ -16,7 +16,7 @@ public class CucumberReportProjectAction extends CucumberReportBaseAction implem
     
     public static final String HOME_PAGE = "network/NetworkIndex.html";
 
-    public CucumberReportProjectAction(AbstractProject<?, ?> project) {
+    public SafeReportProjectAction(AbstractProject<?, ?> project) {
         this.project = project;
     }
 

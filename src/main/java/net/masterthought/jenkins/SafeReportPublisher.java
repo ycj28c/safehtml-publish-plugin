@@ -27,7 +27,7 @@ import org.kohsuke.stapler.DataBoundConstructor;
 //import net.masterthought.cucumber.ReportBuilder;
 //import net.masterthought.cucumber.Reportable;
 
-public class CucumberReportPublisher extends Publisher implements SimpleBuildStep {
+public class SafeReportPublisher extends Publisher implements SimpleBuildStep {
 
 //    private final static String DEFAULT_FILE_INCLUDE_PATTERN = "**/*.json";
 	private final static String DEFAULT_FILE_INCLUDE_PATTERN = "**/*.*";
@@ -56,7 +56,7 @@ public class CucumberReportPublisher extends Publisher implements SimpleBuildSte
     public static final String HOME_PAGE = "network/NetworkIndex.html";
 
     @DataBoundConstructor
-    public CucumberReportPublisher(String jsonReportDirectory, String fileIncludePattern, String fileExcludePattern,
+    public SafeReportPublisher(String jsonReportDirectory, String fileIncludePattern, String fileExcludePattern,
                                    int trendsLimit, int failedStepsNumber, int skippedStepsNumber, int pendingStepsNumber,
                                    int undefinedStepsNumber, int failedScenariosNumber, int failedFeaturesNumber,
                                    String buildStatus, boolean parallelTesting, List<Classification> classifications) {
@@ -92,7 +92,7 @@ public class CucumberReportPublisher extends Publisher implements SimpleBuildSte
 //        SafeArchiveServingRunAction caa = new SafeArchiveServingRunAction(new File(run.getRootDir(), ReportBuilder.BASE_DIRECTORY),
 //                ReportBuilder.BASE_DIRECTORY, ReportBuilder.HOME_PAGE, CucumberReportBaseAction.ICON_NAME, Messages.SidePanel_DisplayName());
         SafeArchiveServingRunAction caa = new SafeArchiveServingRunAction(new File(run.getRootDir(), BASE_DIRECTORY),
-              BASE_DIRECTORY, HOME_PAGE, CucumberReportBaseAction.ICON_NAME, Messages.SidePanel_DisplayName());
+              BASE_DIRECTORY, HOME_PAGE, SafeReportBaseAction.ICON_NAME, Messages.SidePanel_DisplayName());
         run.addAction(caa);
     }
 
@@ -233,7 +233,7 @@ public class CucumberReportPublisher extends Publisher implements SimpleBuildSte
 
     @Override
     public Action getProjectAction(AbstractProject<?, ?> project) {
-        return new CucumberReportProjectAction(project);
+        return new SafeReportProjectAction(project);
     }
 
     public static class Classification extends AbstractDescribableImpl<Classification> {
@@ -258,6 +258,6 @@ public class CucumberReportPublisher extends Publisher implements SimpleBuildSte
     }
 
     @Extension
-    public static class DescriptorImpl extends CucumberReportBuildStepDescriptor {
+    public static class DescriptorImpl extends SafeReportBuildStepDescriptor {
     }
 }

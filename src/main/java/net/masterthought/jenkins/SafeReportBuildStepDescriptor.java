@@ -8,7 +8,7 @@ import hudson.util.FormValidation;
 import hudson.util.ListBoxModel;
 import org.kohsuke.stapler.QueryParameter;
 
-public class CucumberReportBuildStepDescriptor extends BuildStepDescriptor<Publisher> {
+public class SafeReportBuildStepDescriptor extends BuildStepDescriptor<Publisher> {
 
     @Override
     public String getDisplayName() {
