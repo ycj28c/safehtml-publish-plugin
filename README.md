@@ -5,7 +5,7 @@ jenkins benchmark report plugin embody insight benchmark test html report
 ```
 mvn clean compile
 ```
-it will generate "insight-benchmark-report-plugin.hpi" in "\benchmark-report-plugin\target"
+It will generate "insight-benchmark-report-plugin.hpi" in "\benchmark-report-plugin\target"
 
 # How to install
 + Manage Jenkins -> plugin Manager -> upload the "insight-benchmark-report-plugin.hpi" 
