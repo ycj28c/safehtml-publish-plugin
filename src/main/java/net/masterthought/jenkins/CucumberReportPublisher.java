@@ -29,7 +29,8 @@ import org.kohsuke.stapler.DataBoundConstructor;
 
 public class CucumberReportPublisher extends Publisher implements SimpleBuildStep {
 
-    private final static String DEFAULT_FILE_INCLUDE_PATTERN = "**/*.json";
+//    private final static String DEFAULT_FILE_INCLUDE_PATTERN = "**/*.json";
+	private final static String DEFAULT_FILE_INCLUDE_PATTERN = "**/*.*";
 
     private final static String TRENDS_DIR = "benchmarkReport";
     private final static String TRENDS_FILE = "cucumber-trends.json";
@@ -52,7 +53,7 @@ public class CucumberReportPublisher extends Publisher implements SimpleBuildSte
     public final Result buildStatus;
     
     public static final String BASE_DIRECTORY = "benchmarkReport";
-    public static final String HOME_PAGE = "NetworkIndex.html";
+    public static final String HOME_PAGE = "network/NetworkIndex.html";
 
     @DataBoundConstructor
     public CucumberReportPublisher(String jsonReportDirectory, String fileIncludePattern, String fileExcludePattern,
@@ -106,14 +107,16 @@ public class CucumberReportPublisher extends Publisher implements SimpleBuildSte
             }
         }
 
-//        // source directory (possibly on slave)
-//        FilePath inputDirectory = new FilePath(workspace, jsonReportDirectory);
-//
-//        File directoryForReport = build.getRootDir();
+        // source directory (possibly on slave)
+        FilePath inputDirectory = new FilePath(workspace, jsonReportDirectory);
+
+        File directoryForReport = build.getRootDir();
 //        File directoryJsonCache = new File(directoryForReport, ReportBuilder.BASE_DIRECTORY + File.separatorChar + ".cache");
+        File directoryJsonCache = new File(directoryForReport, BASE_DIRECTORY);
 //        int copiedFiles = inputDirectory.copyRecursiveTo(DEFAULT_FILE_INCLUDE_PATTERN, new FilePath(directoryJsonCache));
-//        log(listener, String.format("Copied %d json files from workspace \"%s\" to reports directory \"%s\"",
-//                copiedFiles, inputDirectory.getRemote(), directoryJsonCache));
+        int copiedFiles = inputDirectory.copyRecursiveTo(new FilePath(directoryJsonCache));
+        log(listener, String.format("Copied %d json files from workspace \"%s\" to reports directory \"%s\"",
+                copiedFiles, inputDirectory.getRemote(), directoryJsonCache));
 //
 //        // exclude JSONs that should be skipped (as configured by the user)
 //        String[] jsonReportFiles = findJsonFiles(directoryJsonCache, fileIncludePattern, fileExcludePattern);
