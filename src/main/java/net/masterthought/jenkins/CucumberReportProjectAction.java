@@ -14,7 +14,7 @@ public class CucumberReportProjectAction extends CucumberReportBaseAction implem
     
 	public static final String BASE_DIRECTORY = "benchmarkReport";
     
-    public static final String HOME_PAGE = "NetworkIndex.html";
+    public static final String HOME_PAGE = "network/NetworkIndex.html";
 
     public CucumberReportProjectAction(AbstractProject<?, ?> project) {
         this.project = project;
