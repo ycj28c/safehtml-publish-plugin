@@ -15,12 +15,6 @@
                     description="${%fileIncludePattern.description}">
                 <f:textbox default="**/*.json"/>
             </f:entry>
-            <f:entry
-                    title="${%fileExcludePattern.title}"
-                    field="fileExcludePattern"
-                    description="${%fileExcludePattern.description}">
-                <f:textbox/>
-            </f:entry>
         </f:section>
     </f:advanced>
     
