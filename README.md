@@ -1,4 +1,4 @@
-# benchmark-report-plugin
+# safehtml-publish-plugin
 jenkins benchmark report plugin embody insight benchmark test html report
 
 # How to build
