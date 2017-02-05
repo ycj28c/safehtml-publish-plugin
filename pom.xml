@@ -11,7 +11,7 @@
 
     <groupId>io.github.ycj28c</groupId>
     <artifactId>safehtml-publish-plugin</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>hpi</packaging>
 
     <!-- This name and URL are added by the Jenkins when displaying help.html file -->
