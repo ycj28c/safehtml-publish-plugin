@@ -9,25 +9,22 @@
         <relativePath />
     </parent>
 
-    <groupId>com.equilar.test</groupId>
-    <artifactId>insight-benchmark-report-plugin</artifactId>
+    <groupId>io.github.ycj28c</groupId>
+    <artifactId>safehtml-publish-plugin</artifactId>
     <version>1.0.0</version>
     <packaging>hpi</packaging>
 
     <!-- This name and URL are added by the Jenkins when displaying help.html file -->
-    <name>insight-benchmark-report-plugin</name>
-    <url>https://github.com/ycj28c/benchmark-report-plugin</url>
+    <name>safehtml-publish-plugin</name>
+    <url>https://github.com/ycj28c/safehtml-publish-plugin</url>
 
     <scm>
-        <connection>scm:git:git@github.com:ycj28c/benchmark-report-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:ycj28c/benchmark-report-plugin.git</developerConnection>
-        <url>git@github.com:ycj28c/benchmark-report-plugin.git</url>
-        <tag>insight-benchmark-report-plugin-1.0.0</tag>
+        <connection>scm:git:git@github.com:ycj28c/safehtml-publish-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:ycj28c/safehtml-publish-plugin.git</developerConnection>
+        <url>git@github.com:ycj28c/safehtml-publish-plugin.git</url>
+        <tag>safehtml-publish-plugin-1.0.0</tag>
     </scm>
 
-    <description>
-        This project provides pretty html reports for insight benchmark report. It works by generating html from the benchmark report. 
-    </description>
 
     <licenses>
         <license>
@@ -81,4 +78,5 @@
         </pluginManagement>
     </build>
 
+    <description>publish html report to jenkins which adapt to the security content</description>
 </project>

@@ -1,4 +1,4 @@
-package com.equilar.jenkins;
+package io.github.ycj28c;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -24,7 +24,7 @@ import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Publisher;
 import javax.annotation.Nonnull;
 import jenkins.tasks.SimpleBuildStep;
-import com.equilar.jenkins.Messages;
+import io.github.ycj28c.Messages;
 
 import org.kohsuke.stapler.DataBoundConstructor;
 
@@ -37,8 +37,8 @@ public class SafeReportPublisher extends Publisher implements SimpleBuildStep {
 
     public final Result buildStatus;
     
-    public static final String PLUGIN_NAME = "insight-benchmark-report-plugin";
-    public static final String BASE_DIRECTORY = "benchmarkReport";
+    public static final String PLUGIN_NAME = "safehtml-publish-plugin";
+    public static final String BASE_DIRECTORY = "safeReport";
     public static final String WRAPPER_NAME = "safereport-wrapper.html";
 
 	@DataBoundConstructor

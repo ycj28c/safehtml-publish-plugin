@@ -1,4 +1,4 @@
-package com.equilar.jenkins;
+package io.github.ycj28c;
 
 import hudson.model.AbstractProject;
 import hudson.model.ProminentProjectAction;

@@ -1,7 +1,7 @@
-package com.equilar.jenkins;
+package io.github.ycj28c;
 
 import hudson.model.Action;
-import com.equilar.jenkins.Messages;
+import io.github.ycj28c.Messages;
 
 public abstract class SafeReportBaseAction implements Action {
 

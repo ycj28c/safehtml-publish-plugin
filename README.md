@@ -3,29 +3,29 @@ jenkins benchmark report plugin embody insight benchmark test html report
 
 # How to build
 ```
-mvn clean compile
+mvn clean package
 ```
 It will generate "insight-benchmark-report-plugin.hpi" in "\benchmark-report-plugin\target"
 
 # How to install
 + Manage Jenkins -> plugin Manager -> upload the "insight-benchmark-report-plugin.hpi" 
 
-![alt tag](http://drive.google.com/uc?export=view&id=0B7LGjD8XYmuueDZPRDBnVmhBZEE)
+![alt tag](.README/1.png)
 
 
 + In your jenkins job, Add Post-build action 
 
-![alt tag](http://drive.google.com/uc?export=view&id=0B7LGjD8XYmuuZElZREJvdzlkUUk)
+![alt tag](.README/2.png)
 
 
 + Setup report setting
 
-![alt tag](http://drive.google.com/uc?export=view&id=0B7LGjD8XYmuuSnpJdFo1dDBaSTg)
+![alt tag](.README/3.png)
 
 
 + The new report button will show up in your jenkins jobs
 
-![alt tag](http://drive.google.com/uc?export=view&id=0B7LGjD8XYmuuOXFwYmJ5blF2Rnc)
+![alt tag](.README/4.png)
 
 
 
