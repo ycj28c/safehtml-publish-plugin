@@ -1,4 +1,4 @@
-# safehtml-publish-plugin
+# safehtml-publish-plugin [![Build Status](https://travis-ci.org/ycj28c/safehtml-publish-plugin.svg?branch=master)](https://travis-ci.org/ycj28c/safehtml-publish-plugin)
 jenkins benchmark report plugin embody insight benchmark test html report
 
 # How to build
