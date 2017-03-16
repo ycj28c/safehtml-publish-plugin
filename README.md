@@ -1,14 +1,14 @@
 # safehtml-publish-plugin [![Build Status](https://travis-ci.org/ycj28c/safehtml-publish-plugin.svg?branch=master)](https://travis-ci.org/ycj28c/safehtml-publish-plugin)
-jenkins benchmark report plugin embody insight benchmark test html report
+jenkins report plugin which able to display HTML report to skip the security block for jenkin > 1.6
 
 # How to build
 ```
 mvn clean package
 ```
-It will generate "insight-benchmark-report-plugin.hpi" in "\benchmark-report-plugin\target"
+It will generate "safehtml-publish-plugin.hpi" in "\safehtml-publish-plugin\target"
 
 # How to install
-+ Manage Jenkins -> plugin Manager -> upload the "insight-benchmark-report-plugin.hpi" 
++ Manage Jenkins -> plugin Manager -> upload the "safehtml-publish-plugin.hpi" 
 
 ![alt tag](.README/1.png)
 
