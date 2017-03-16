@@ -1,5 +1,5 @@
 # safehtml-publish-plugin [![Build Status](https://travis-ci.org/ycj28c/safehtml-publish-plugin.svg?branch=master)](https://travis-ci.org/ycj28c/safehtml-publish-plugin)
-jenkins report plugin which able to display HTML report to skip the security block for jenkin > 1.6
+jenkins report plugin which able to display HTML report to skip the security block for jenkins > 1.6
 
 # How to build
 ```
